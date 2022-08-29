@@ -1,0 +1,19 @@
+.category {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+
+    .categoryContainer {
+        flex: 6;
+        justify-content: space-between;
+    }
+    .productItem {
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 8px 8px 10px 4px rgb(201 201 201 / 47%);
+        border-radius: 10px;
+        height: auto;
+        min-width: 150px;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "admin": "ADMIN",
+    "dashboard": "Dashboard",
+    "customer": "Customer",
+    "products": "Products",
+    "orders": "Orders",
+    "delivery": "Delivery",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "logout": "Logout"
+}
