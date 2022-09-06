@@ -1,6 +1,6 @@
-import './datatableusers.scss'
+import './datatable_order.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { userColumns } from '../../datatablesource'
+import { orderColumns } from '../../datatablesource'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
@@ -13,7 +13,7 @@ import React, { FunctionComponent } from 'react'
 import { FormControl, InputAdornment, TextField } from '@mui/material'
 import { makeStyles, createStyles } from '@mui/styles'
 
-const Datatable = () => {
+const DatatableOrder = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [query, setQuery] = useState('')
@@ -40,7 +40,7 @@ const Datatable = () => {
         // LISTEN (REALTIME)
         setLoading(true)
         const unsub = onSnapshot(
-            collection(db, 'users'),
+            collection(db, 'order'),
             (snapShot) => {
                 const list: any = []
                 snapShot.docs.forEach((doc) => {
@@ -58,7 +58,7 @@ const Datatable = () => {
             unsub()
         }
     }, [])
-    const keys = ['fullname', 'username', 'email', 'id']
+    const keys = ['name', 'phone', 'cartItems', 'totalQuantity']
     // chu y voi cac key tao ben client se k co gay ra loi
 
     const search = (data: any) => {
@@ -70,7 +70,7 @@ const Datatable = () => {
 
     const handleDelete = async (id: any) => {
         try {
-            await deleteDoc(doc(db, 'users', id))
+            await deleteDoc(doc(db, 'order', id))
             setData(data.filter((item: any) => item.id !== id))
         } catch (err) {
             console.log(err)
@@ -119,6 +119,22 @@ const Datatable = () => {
         },
     ]
 
+    interface CartItemsState {
+        id: string
+        title: string
+        price: number
+        quantity: number
+        totalPrice: number
+        img: [{ img: string }]
+        totalAmountOrder: number
+        totalStock: number
+    }
+    function setDate(unixTime: number) {
+        const date = new Date(unixTime * 1000)
+        // console.log(date.toLocaleDateString('en-US'))
+        return date.toLocaleDateString('en-US')
+    }
+
     return (
         <>
             {/* {loading ? (
@@ -134,7 +150,7 @@ const Datatable = () => {
             ) : ( */}
             <div className="datatable">
                 <div className="datatableTitle">
-                    Customer
+                    Order
                     <div className="search">
                         <FormControl>
                             <TextField
@@ -161,11 +177,61 @@ const Datatable = () => {
                         Add New
                     </Link>
                 </div>
-                <DataGrid className="datagrid" rows={search(data)} columns={userColumns.concat(actionColumn)} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection />
+                {/* <DataGrid className="datagrid" rows={search(data)} columns={orderColumns.concat(actionColumn)} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection /> */}
+                <div className="table-responsive">
+                    <table className="table table-bordered border-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Ngày mua</th>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Đơn giá</th>
+                                <th scope="col">Phí vận chuyển</th>
+                                <th scope="col">Tổng tiền</th>
+                                <th scope="col">Trạng thái đơn hàng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data &&
+                                data.map((item: any, index: number) => (
+                                    <tr key={index}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{setDate(item.timeStamp.seconds)}</td>
+                                        <td className="">
+                                            {item.cartItems.map((item: CartItemsState, index: number) => (
+                                                <div key={index} className="d-flex flex-colum ">
+                                                    <img src={item.img[0].img} className="order__item-img" />
+                                                    <p>{item.title}</p>
+                                                </div>
+                                            ))}
+                                        </td>
+                                        <td>
+                                            {item.cartItems.map((item: CartItemsState, index: number) => (
+                                                <div key={index} className="d-flex flex-colum justify-content-between">
+                                                    <p>{item.quantity}</p>
+                                                </div>
+                                            ))}
+                                        </td>
+                                        <td>
+                                            {item.cartItems.map((item: CartItemsState, index: number) => (
+                                                <div key={index} className="d-flex flex-colum justify-content-between">
+                                                    <p>{item.price}</p>
+                                                </div>
+                                            ))}
+                                        </td>
+                                        <td>30</td>
+                                        <td>{item.totalAmountOrder}</td>
+                                        <td>Đặt hàng thành công</td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             {/* )} */}
         </>
     )
 }
 
-export default Datatable
+export default DatatableOrder

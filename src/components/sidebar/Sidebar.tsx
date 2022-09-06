@@ -6,6 +6,8 @@ import HomeSharpIcon from '@mui/icons-material/HomeSharp'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import DescriptionIcon from '@mui/icons-material/Description'
+
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -22,11 +24,12 @@ const Sidebar = () => {
         dispatch(authLogout(''))
         console.log('dang xuat')
     }
+
     return (
         <div className="sidebar">
             <div className="top">
                 <Link to="/" style={{ textDecoration: 'none' }}>
-                    <span className="logo">{t("sidebar:admin")}</span>
+                    <span className="logo">{t('sidebar:admin')}</span>
                 </Link>
             </div>
             <hr />
@@ -35,42 +38,51 @@ const Sidebar = () => {
                     {/* <p className="title">MENU</p> */}
                     <Link to="/" style={{ textDecoration: 'none' }}>
                         <li>
-                            <span>{t("sidebar:dashboard")}</span>
+                            <span>{t('sidebar:dashboard')}</span>
                             <HomeSharpIcon className="icon" />
                         </li>
                     </Link>
                     <Link to="/users" style={{ textDecoration: 'none' }}>
                         <li>
-                            <span>{t("sidebar:customer")}</span>
+                            <span>{t('sidebar:customer')}</span>
                             <PersonOutlineIcon className="icon" />
                         </li>
                     </Link>
                     <Link to="/products" style={{ textDecoration: 'none' }}>
                         <li>
-                            <span>{t("sidebar:products")}</span>
+                            <span>{t('sidebar:products')}</span>
                             <CategoryRoundedIcon className="icon" />
                         </li>
                     </Link>
+                    <Link to="/category" style={{ textDecoration: 'none' }}>
+                        <li>
+                            <span>{t('sidebar:category')}</span>
+                            <DescriptionIcon className="icon" />
+                        </li>
+                    </Link>
+                    <Link to="/order" style={{ textDecoration: 'none' }}>
+                        <li>
+                            <span>{t('sidebar:orders')}</span>
+                            <CreditCardIcon className="icon" />
+                        </li>
+                    </Link>
+
                     <li>
-                        <span>{t("sidebar:orders")}</span>
-                        <CreditCardIcon className="icon" />
-                    </li>
-                    <li>
-                        <span>{t("sidebar:delivery")}</span>
+                        <span>{t('sidebar:delivery')}</span>
                         <LocalShippingIcon className="icon" />
                     </li>
 
                     <li>
-                        <span>{t("sidebar:notifications")}</span>
+                        <span>{t('sidebar:notifications')}</span>
                         <NotificationsNoneIcon className="icon" />
                     </li>
 
-                    <li>
-                        <span>{t("sidebar:profile")}</span>
+                    {/* <li>
+                        <span>{t('sidebar:profile')}</span>
                         <AccountCircleOutlinedIcon className="icon" />
-                    </li>
+                    </li> */}
                     <li onClick={handleLogout}>
-                        <span>{t("sidebar:logout")}</span>
+                        <span>{t('sidebar:logout')}</span>
                         <ExitToAppIcon className="icon" />
                     </li>
                 </ul>

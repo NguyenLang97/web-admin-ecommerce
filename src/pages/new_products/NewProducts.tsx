@@ -70,7 +70,7 @@ const NewProducts = () => {
     }
 
     const handleAdd: SubmitHandler<FormValues> = async (data) => {
-        const dataNew = { ...data, img:[...img] }
+        const dataNew = { ...data, img: [...img] }
         console.log(dataNew)
         console.log(img)
         setLoading(true)
@@ -95,7 +95,7 @@ const NewProducts = () => {
     }
 
     const handleDeleteImage = (id: any) => {
-        setFile(file.filter((image, index) => index != id ))
+        setFile(file.filter((image, index) => index != id))
     }
 
     const {
@@ -177,8 +177,6 @@ const NewProducts = () => {
                                             placeholder="Description"
                                             {...register('description', {
                                                 required: 'Vui lòng nhập thông tin chi tiết sản phâm',
-                                                maxLength: { value: 500, message: "Vui lòng nhập 500 ký tự" }
-                                                
                                             })}
                                         ></textarea>
                                         {errors.description && <p className="messages">{errors.description.message}</p>}

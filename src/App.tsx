@@ -12,6 +12,8 @@ import ProfileUser from './pages/profile_user/ProfileUser'
 import EditUser from './pages/edit_user/EditUser'
 import ProfileProduct from './pages/profile_product/ProfileProduct'
 import EditProduct from './pages/edit_product/EditProduct'
+import ListOrder from './pages/list_order/ListOrder'
+import ListCategory from './pages/list_category/ListProducts'
 
 interface RootState {
     darkModeReducer: {
@@ -115,6 +117,74 @@ function App() {
                                         </RequireAuth>
                                     }
                                 />
+                            </Route>
+                            <Route path="category">
+                                <Route
+                                    index
+                                    element={
+                                        <RequireAuth>
+                                            <ListCategory />
+                                        </RequireAuth>
+                                    }
+                                />
+                                <Route
+                                    path=":productId"
+                                    element={
+                                        <RequireAuth>
+                                            <ProfileProduct />
+                                        </RequireAuth>
+                                    }
+                                />
+                                <Route
+                                    path="new"
+                                    element={
+                                        <RequireAuth>
+                                            <NewProducts />
+                                        </RequireAuth>
+                                    }
+                                />
+                                <Route
+                                    path="edit"
+                                    element={
+                                        <RequireAuth>
+                                            <EditProduct />
+                                        </RequireAuth>
+                                    }
+                                />
+                            </Route>
+                            <Route path="order">
+                                <Route
+                                    index
+                                    element={
+                                        <RequireAuth>
+                                            <ListOrder />
+                                        </RequireAuth>
+                                    }
+                                />
+                                {/* <Route
+                                    path=":productId"
+                                    element={
+                                        <RequireAuth>
+                                            <ProfileProduct />
+                                        </RequireAuth>
+                                    }
+                                />
+                                <Route
+                                    path="new"
+                                    element={
+                                        <RequireAuth>
+                                            <NewProducts />
+                                        </RequireAuth>
+                                    }
+                                />
+                                <Route
+                                    path="edit"
+                                    element={
+                                        <RequireAuth>
+                                            <EditProduct />
+                                        </RequireAuth>
+                                    }
+                                /> */}
                             </Route>
                         </Route>
                     </Routes>

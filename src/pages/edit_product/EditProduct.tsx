@@ -51,13 +51,13 @@ const EditUser = () => {
     const [per, setPerc] = useState<number>()
     const navigate = useNavigate()
 
-    const docRef = doc(db, 'products', state as string)
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm<FormValues>({})
+    const docRef = doc(db, 'products', state as string)
 
     useEffect(() => {
         const docSnap = async () => {

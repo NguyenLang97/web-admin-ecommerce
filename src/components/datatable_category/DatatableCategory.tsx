@@ -1,4 +1,4 @@
-import './datatableproducts.scss'
+import './datatable_category.scss'
 import { DataGrid } from '@mui/x-data-grid'
 import { productsColumns } from '../../datatablesource'
 import { useEffect, useState } from 'react'
@@ -108,8 +108,8 @@ const DatatableProducts = () => {
                             Add New
                         </Link>
                     </div>
-                    {/* <Category /> */}
-                    <DataGrid className="datagrid" rows={data} columns={productsColumns.concat(actionColumn)} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection />
+                    <Category />
+                    {/* <DataGrid className="datagrid" rows={data} columns={productsColumns.concat(actionColumn)} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection /> */}
                 </div>
             )}
         </>
